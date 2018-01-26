@@ -58,14 +58,16 @@ class Stack {
   }
 }
 
-function main() {
-  const starTrek = new Stack;
-  starTrek.push('Kirk');
-  starTrek.push('Spock');
-  starTrek.push('McCoy');
-  starTrek.push('Scotty');
-  starTrek.display();
-  starTrek.remove('McCoy');
-}
+module.exports = Stack;
 
-main();
+// function main() {
+//   const starTrek = new Stack;
+//   starTrek.push('Kirk');
+//   starTrek.push('Spock');
+//   starTrek.push('McCoy');
+//   starTrek.push('Scotty');
+//   starTrek.display();
+//   starTrek.remove('McCoy');
+// }
+
+// main();
