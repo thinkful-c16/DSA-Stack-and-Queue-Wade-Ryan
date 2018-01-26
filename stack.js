@@ -22,6 +22,9 @@ class Stack {
   }
 
   pop() {
+    if (this.top === null){
+      return null;
+    }
     const node = this.top;
     this.top = node.next;
     return node.data;
