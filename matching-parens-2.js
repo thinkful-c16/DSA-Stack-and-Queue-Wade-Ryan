@@ -4,35 +4,35 @@ const Stack = require('./stack.js');
 
 function parenMatch(exp) {
 
-  const stack = new Stack;
-
   const open = '(';
   const closed = ')';
-  let openPositions = new Stack;
+  const openPositions = new Stack();
+  const parens = new Stack();
   let closedPosition;
 
   // check to see if expression is empty, if so return message
 
   for (let i = 0; i < exp.length; i++) {
     if (exp[i] === open) {
-      stack.push(exp[i]);
-      // openPositions.push(i + 1);
+      parens.push(exp[i]);
+      openPositions.push(i + 1);
     }
     else if (exp[i] === closed) {
-      if (stack.pop() !== open) {
-        // closedPosition = i + 1;
-        // return console.log(`ERROR: Incorrect closed parenthesis at position ${closedPosition} in expression `);
-        return false;
+      if (parens.pop() !== open) {
+        closedPosition = i + 1;
+        return new Error(`ERROR: Incorrect closed parenthesis at position ${closedPosition} in expression `);
       }
       else {
         openPositions.pop();
       }
     }
   }
-  if (stack.pop() === open) {
-    return console.log(`ERROR: Open parenthesis at position ${openPosition} has no closing parenthesis in expression`);
+  if (parens.pop() === open) {
+    return new Error(`ERROR: Open parenthesis at position ${openPositions.pop()} has no closing parenthesis in expression`);
   }
 
+  console.log('Success! No incorrect parens found in expression');
+  return true;
 }
 
 const correct = '(())';
@@ -72,10 +72,10 @@ function matchParens(exp) {
   return true;
 }
 
-console.log('this should be true:', matchParens(correct));
+console.log('this should be true:', parenMatch(correct));
 
-// console.log('this should be false:', matchParens(incorrectClosed));
+console.log('this should be false:', parenMatch(incorrectClosed));
 
-// console.log('this should be false:', matchParens(incorrectOpen));
+console.log('this should be false:', parenMatch(incorrectOpen));
 
-// console.log('this should be true:', matchParens(correctTwo));
+console.log('this should be true:', parenMatch(correctTwo));
